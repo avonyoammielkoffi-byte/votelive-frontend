@@ -22,7 +22,7 @@ const font = "'DM Sans', 'Segoe UI', sans-serif";
 const fontDisplay = "'Playfair Display', Georgia, serif";
 
 export default function HomePage() {
-  const [events, setEvents] = useState([]);
+  const [, setEvents] = useState([]);
   const [candidates, setCandidates] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -59,6 +59,7 @@ export default function HomePage() {
         });
       } else setLoading(false);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return (
@@ -85,7 +86,6 @@ export default function HomePage() {
         ::-webkit-scrollbar-thumb { background: ${theme.accent}; border-radius: 2px; }
       `}</style>
 
-      {/* NAV */}
       <nav style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         padding: '16px 24px', position: 'sticky', top: 0, zIndex: 100,
@@ -117,13 +117,10 @@ export default function HomePage() {
 
       {selectedEvent ? (
         <>
-          {/* HERO */}
           <div style={{ position: 'relative', padding: '48px 24px 40px', textAlign: 'center', overflow: 'hidden', animation: 'fadeUp 0.6s ease both' }}>
             <div style={{ position: 'absolute', inset: 0, zIndex: 0, background: `radial-gradient(ellipse 80% 60% at 50% 0%, ${theme.accentGlow} 0%, transparent 70%)`, pointerEvents: 'none' }} />
 
             <div style={{ position: 'relative', zIndex: 1 }}>
-
-              {/* Badge site officiel */}
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: 6,
                 background: isDarkMode ? 'rgba(232,184,75,0.12)' : 'rgba(232,184,75,0.15)',
@@ -135,22 +132,12 @@ export default function HomePage() {
                 🏆 Site officiel de vote
               </div>
 
-              {/* Logo organisateur */}
               {selectedEvent.logo_url && (
                 <div style={{ marginBottom: 20 }}>
-                  <img
-                    src={selectedEvent.logo_url}
-                    alt="logo organisateur"
-                    style={{
-                      width: 80, height: 80, borderRadius: 16,
-                      objectFit: 'cover', border: `2px solid ${theme.borderAccent}`,
-                      boxShadow: `0 8px 24px rgba(0,0,0,0.3)`
-                    }}
-                  />
+                  <img src={selectedEvent.logo_url} alt="logo organisateur" style={{ width: 80, height: 80, borderRadius: 16, objectFit: 'cover', border: `2px solid ${theme.borderAccent}`, boxShadow: `0 8px 24px rgba(0,0,0,0.3)` }} />
                 </div>
               )}
 
-              {/* Badge live */}
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 background: isDarkMode ? 'rgba(216,90,48,0.12)' : 'rgba(216,90,48,0.1)',
@@ -166,7 +153,6 @@ export default function HomePage() {
                 {selectedEvent.name}
               </h1>
 
-              {/* Organisateur */}
               {selectedEvent.organizer && (
                 <div style={{ fontSize: 13, color: theme.textMuted, marginBottom: 10 }}>
                   Organisé par <span style={{ color: theme.accent, fontWeight: 600 }}>{selectedEvent.organizer}</span>
@@ -191,19 +177,12 @@ export default function HomePage() {
                 ))}
               </div>
 
-              {/* ✅ CORRECTION : balise <a> complète */}
               {selectedEvent.whatsapp && (
-                <a
+                
                   href={"https://wa.me/" + selectedEvent.whatsapp}
                   target="_blank"
                   rel="noreferrer"
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 8,
-                    background: '#25D366', color: '#fff',
-                    borderRadius: 10, padding: '10px 20px',
-                    fontSize: 14, fontWeight: 600, textDecoration: 'none',
-                    boxShadow: '0 4px 16px rgba(37,211,102,0.3)'
-                  }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#25D366', color: '#fff', borderRadius: 10, padding: '10px 20px', fontSize: 14, fontWeight: 600, textDecoration: 'none', boxShadow: '0 4px 16px rgba(37,211,102,0.3)' }}
                 >
                   💬 Contacter sur WhatsApp
                 </a>
@@ -211,7 +190,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* CANDIDATS */}
           <div style={{ padding: '0 20px 8px', animation: 'fadeUp 0.6s 0.15s ease both', opacity: 0, animationFillMode: 'forwards' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
               <div style={{ width: 3, height: 20, background: theme.accent, borderRadius: 2 }} />
@@ -247,7 +225,6 @@ export default function HomePage() {
                         {c.name[0]}
                       </div>
                     )}
-
                     {hoveredImage === c.id && (
                       <div style={{ position: 'absolute', inset: 0, background: 'rgba(216,90,48,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'fadeUp 0.2s ease' }}>
                         <span style={{ color: '#fff', fontSize: 16, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>Voter</span>
@@ -260,13 +237,7 @@ export default function HomePage() {
                   </div>
 
                   <button
-                    style={{
-                      width: '100%', background: hoveredCard === c.id ? theme.accent : 'transparent',
-                      color: hoveredCard === c.id ? '#fff' : theme.accent,
-                      border: 'none', borderTop: `1px solid ${hoveredCard === c.id ? 'transparent' : theme.border}`,
-                      padding: '11px', fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                      fontFamily: font, transition: 'all 0.25s', marginTop: 10, letterSpacing: '0.02em'
-                    }}
+                    style={{ width: '100%', background: hoveredCard === c.id ? theme.accent : 'transparent', color: hoveredCard === c.id ? '#fff' : theme.accent, border: 'none', borderTop: `1px solid ${hoveredCard === c.id ? 'transparent' : theme.border}`, padding: '11px', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: font, transition: 'all 0.25s', marginTop: 10, letterSpacing: '0.02em' }}
                     onClick={() => navigate(`/event/${selectedEvent.id}/candidate/${c.id}`)}
                   >
                     {hoveredCard === c.id ? `→ Voter maintenant` : `Candidat ${idx + 1}`}
@@ -276,7 +247,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* INFOS + COMMENT VOTER */}
           <div style={{ padding: '32px 20px 8px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 32, animation: 'fadeUp 0.6s 0.2s ease both', opacity: 0, animationFillMode: 'forwards' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
@@ -323,7 +293,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* FAQ */}
           <div style={{ padding: '32px 20px 8px', animation: 'fadeUp 0.6s 0.3s ease both', opacity: 0, animationFillMode: 'forwards' }}>
             <div style={{ maxWidth: 680, margin: '0 auto' }}>
               <div style={{ textAlign: 'center', marginBottom: 28 }}>
@@ -347,11 +316,10 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Contact WhatsApp bas de page */}
           {selectedEvent.whatsapp && (
             <div style={{ textAlign: 'center', padding: '32px 20px' }}>
               <p style={{ fontSize: 14, color: theme.textMuted, marginBottom: 12 }}>Un problème ? Contactez l'organisateur</p>
-              <a href={`https://wa.me/${selectedEvent.whatsapp}`} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#25D366', color: '#fff', borderRadius: 10, padding: '10px 20px', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              <a href={"https://wa.me/" + selectedEvent.whatsapp} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#25D366', color: '#fff', borderRadius: 10, padding: '10px 20px', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
                 💬 WhatsApp : +{selectedEvent.whatsapp}
               </a>
             </div>
