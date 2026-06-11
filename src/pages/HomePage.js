@@ -178,7 +178,7 @@ export default function HomePage() {
               </div>
 
               {selectedEvent.whatsapp && (
-                
+                <a
                   href={"https://wa.me/" + selectedEvent.whatsapp}
                   target="_blank"
                   rel="noreferrer"
